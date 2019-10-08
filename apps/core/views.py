@@ -38,7 +38,7 @@ def search(request):
             except:
                 return render(request, 'upload.html', {'error': 'An error occurred!'})
 
-            list_img = ['/upload/' + x[0] for x in respone]
+            list_img = ['/static/' + x[0] for x in respone]
 
             context['returned'] = list_img
         except Exception as ex:
