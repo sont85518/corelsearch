@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h3>VISUAL EXTRACTION</h3>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="document">
+    <button type="submit">Upload file</button>
+  </form>
+  {% if url %}
+      <br>
+      <img src="{{ url }}" alt="Result" height="100%" width="100%">
+      {% if text %}
+        <br>
+
+          <h4>TEXT:</h4>
+          <div class="result_area">
+              {% for t in text %}
+                  <div class="result_item">
+                      <p>{{ t }}</p>
+                  </div>
+              {% endfor %}
+          </div>
+      {% endif %}
+      {% if face %}
+          <h4>FACE:</h4>
+          <div class="result_area">
+              {% for link in face %}
+                  <div class="result_item">
+                    <img src="{{ link }}" height="100" width="100">
+                  </div>
+              {% endfor %}
+          </div>
+      {% endif %}
+  {% endif %}
+
+    {% if error %}
+        <br>
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                {{ error }}
+        </div>
+    {% endif %}
+{% endblock %}
